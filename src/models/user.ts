@@ -19,4 +19,17 @@ const createUser = async (obj: NewUser): Promise<{ id: number, username: string 
   };
 };
 
+export const getUserByName = async (obj: NewUser) => {
+  const { username, password } = obj;
+  const query = `SELECT username, password 
+    FROM Trybesmith.Users WHERE username = ? AND password = ?`;
+  const [result] = await connection
+    .execute(query, [username, password]);
+  const [user] = result as NewUser[];
+
+  if (!user) return null;
+  
+  return user;
+};
+
 export default createUser;
