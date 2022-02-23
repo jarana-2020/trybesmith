@@ -1,6 +1,6 @@
 import express from 'express';
 import executeLogin from './controllers/login';
-import createProduct from './controllers/product';
+import createProduct, { getAllProducts } from './controllers/product';
 import createUser from './controllers/user';
 import errorMidleware from './middlewares/error';
 import validatClasse from './middlewares/validateClasse';
@@ -29,6 +29,7 @@ app.post(
   checkAmountProduct,
   createProduct,
 );
+app.get('/products', validateToken, getAllProducts);
 app.use(errorMidleware);
 
 export default app;
