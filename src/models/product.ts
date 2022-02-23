@@ -28,4 +28,10 @@ export const getAllProducts = async () => {
   return products as Product[];
 };
 
+export const updateProduct = async (id: number, order: number) => {
+  const query = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
+  const [result]: [OkPacket, FieldPacket[]] = await connection.execute(query, [order, id]);
+  return result.affectedRows;
+};
+
 export default createProduct;
