@@ -1,6 +1,9 @@
 import { FieldPacket, OkPacket } from 'mysql2';
 import connection from './connection';
 
+export interface User extends NewUser {
+  id: number
+}
 export interface NewUser {
   username: string;
   classe: string;
@@ -21,11 +24,11 @@ const createUser = async (obj: NewUser): Promise<{ id: number, username: string 
 
 export const getUserByName = async (obj: NewUser) => {
   const { username, password } = obj;
-  const query = `SELECT username, password 
+  const query = `SELECT username, id 
     FROM Trybesmith.Users WHERE username = ? AND password = ?`;
   const [result] = await connection
     .execute(query, [username, password]);
-  const [user] = result as NewUser[];
+  const [user] = result as User[];
 
   if (!user) return null;
   
