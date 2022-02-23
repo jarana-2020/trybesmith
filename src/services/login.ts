@@ -1,9 +1,9 @@
 import { getUserByName, NewUser } from '../models/user';
 
-export type ErrorMessage = {
+export interface ErrorMessage {
   code: number;
   message:{ error: string }
-};
+}
 
 const loginUser = async (obj: NewUser) => {
   const user = await getUserByName(obj);
