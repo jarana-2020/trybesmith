@@ -1,11 +1,13 @@
 import express from 'express';
 import executeLogin from './controllers/login';
+import createNewOrder from './controllers/order';
 import createProduct, { getAllProducts } from './controllers/product';
 import createUser from './controllers/user';
 import errorMidleware from './middlewares/error';
 import validatClasse from './middlewares/validateClasse';
 import validatLevel from './middlewares/validateLevel';
 import validateName from './middlewares/validateName';
+import checkOrder from './middlewares/validateOrder';
 import validatePassword from './middlewares/validatePassword';
 import checkNameProduct, { checkAmountProduct } from './middlewares/validateProduct';
 import validateToken from './middlewares/validateToken';
@@ -30,6 +32,7 @@ app.post(
   createProduct,
 );
 app.get('/products', validateToken, getAllProducts);
+app.post('/orders', validateToken, checkOrder, createNewOrder);
 app.use(errorMidleware);
 
 export default app;
