@@ -1,11 +1,6 @@
 import { FieldPacket, OkPacket } from 'mysql2';
+import { Order } from '../interfaces/interfaces';
 import connection from './connection';
-
-export interface Order {
-  id: number;
-  productId: number;
-  userId: number;
-}
 
 const insertOrder = async (userId: number) => {
   const query = 'INSERT INTO Trybesmith.Orders (userId) VALUE(?)';

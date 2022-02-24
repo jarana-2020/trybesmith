@@ -1,15 +1,6 @@
 import { FieldPacket, OkPacket } from 'mysql2';
+import { NewUser, User } from '../interfaces/interfaces';
 import connection from './connection';
-
-export interface User extends NewUser {
-  id: number
-}
-export interface NewUser {
-  username: string;
-  classe: string;
-  level: number;
-  password: string;
-}
 
 const createUser = async (obj: NewUser): Promise<{ id: number, username: string }> => {
   const { username, classe, level, password } = obj;

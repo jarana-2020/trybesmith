@@ -3,7 +3,7 @@ import { Secret, sign } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 // import { HttpExceptions } from '../middlewares/error';
 import loginUser, { ErrorMessage } from '../services/login';
-import { User } from '../models/user';
+import { User } from '../interfaces/interfaces';
 
 dotenv.config();
 

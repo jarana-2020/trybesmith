@@ -1,4 +1,5 @@
-import insertOrder, { getAllOrders, Order, orderById } from '../models/order';
+import { Order } from '../interfaces/interfaces';
+import insertOrder, { getAllOrders, orderById } from '../models/order';
 import { updateProduct } from '../models/product';
 import getOrderProducts from '../utils/utils';
 import { ErrorMessage } from './login';

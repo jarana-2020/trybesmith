@@ -1,4 +1,5 @@
-import { getUserByName, NewUser } from '../models/user';
+import { NewUser } from '../interfaces/interfaces';
+import { getUserByName } from '../models/user';
 
 export interface ErrorMessage {
   code: number;

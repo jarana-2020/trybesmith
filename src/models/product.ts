@@ -1,14 +1,6 @@
 import { FieldPacket, OkPacket } from 'mysql2';
+import { NewProduct, Product } from '../interfaces/interfaces';
 import connection from './connection';
-
-interface Product extends NewProduct {
-  id: number;
-  orderId: number | null;
-}
-export interface NewProduct {
-  name: string;
-  amount: string;
-}
 
 const createProduct = async (obj: NewProduct) => {
   const { name, amount } = obj;
