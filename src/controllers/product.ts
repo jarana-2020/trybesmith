@@ -5,8 +5,7 @@ import createNewProduct, { allProducts } from '../services/product';
 const createProduct = async (req: PersonalRequest, res: Response) => {
   try {
     const product = await createNewProduct(req.body);
-    const { id, name, amount } = product;
-    return res.status(201).json({ item: { id, name, amount } });
+    return res.status(201).json(product);
   } catch (error) {
     res.status(500).json(error);
   }

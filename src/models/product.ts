@@ -1,12 +1,13 @@
-import { FieldPacket, OkPacket } from 'mysql2';
+import { OkPacket, RowDataPacket } from 'mysql2';
 import { NewProduct, Product } from '../interfaces/interfaces';
+import { ProductType } from '../types/product';
 import connection from './connection';
 
-const createProduct = async (obj: NewProduct) => {
+const createProduct = async (obj: NewProduct):Promise<ProductType> => {
   const { name, amount } = obj;
   const query = 'INSERT INTO Trybesmith.Products (name, amount) VALUES(?, ?)';
-  const [product]:[OkPacket, FieldPacket[]] = await connection
-    .execute(query, [name, amount]);
+  const [product] = await connection
+    .execute<OkPacket>(query, [name, amount]);
   return {
     id: product.insertId,
     name,
@@ -14,15 +15,15 @@ const createProduct = async (obj: NewProduct) => {
   };
 };
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (): Promise<Product[]> => {
   const query = 'SELECT * FROM Trybesmith.Products';
-  const [products] = await connection.execute(query);
+  const [products] = await connection.execute<RowDataPacket[]>(query);
   return products as Product[];
 };
 
-export const updateProduct = async (id: number, order: number) => {
+export const updateProduct = async (id: number, order: number):Promise<number> => {
   const query = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
-  const [result]: [OkPacket, FieldPacket[]] = await connection.execute(query, [order, id]);
+  const [result] = await connection.execute<OkPacket>(query, [order, id]);
   return result.affectedRows;
 };
 
