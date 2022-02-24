@@ -1,8 +1,8 @@
-import { Order } from '../models/order';
-
 // interface OrderReduced {
 //   productIds: number[];
 // }
+
+import { Order } from '../interfaces/interfaces';
 
 // const getOrder = (array: Order[]) => {
 //   const result = array.reduce((ac: OrderReduced, cur) => {
