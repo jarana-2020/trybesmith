@@ -1,6 +1,6 @@
 import express from 'express';
 import executeLogin from './controllers/login';
-import createNewOrder, { orderById } from './controllers/order';
+import createNewOrder, { getAllOrders, orderById } from './controllers/order';
 import createProduct, { getAllProducts } from './controllers/product';
 import createUser from './controllers/user';
 import errorMidleware from './middlewares/error';
@@ -34,6 +34,7 @@ app.post(
 app.get('/products', validateToken, getAllProducts);
 app.post('/orders', validateToken, checkOrder, createNewOrder);
 app.get('/orders/:id', validateToken, orderById);
+app.get('/orders', validateToken, getAllOrders);
 app.use(errorMidleware);
 
 export default app;
