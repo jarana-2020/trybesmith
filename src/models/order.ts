@@ -2,12 +2,14 @@ import { FieldPacket, OkPacket } from 'mysql2';
 import connection from './connection';
 
 export interface Order {
+  id: number;
   productId: number;
+  userId: number;
 }
 
-const insertOrder = async () => {
-  const query = 'INSERT INTO Trybesmith.Orders VALUE()';
-  const [order]:[OkPacket, FieldPacket[]] = await connection.execute(query);
+const insertOrder = async (userId: number) => {
+  const query = 'INSERT INTO Trybesmith.Orders (userId) VALUE(?)';
+  const [order]:[OkPacket, FieldPacket[]] = await connection.execute(query, [userId]);
   return {
     id: order.insertId,
   };
@@ -20,6 +22,15 @@ export const orderById = async (id: number) => {
     ON O.id = P.orderId
     WHERE O.id = ?`;
   const [result] = await connection.execute(query, [id]);
+  const order = result as Order[];
+  return order;
+};
+
+export const getAllOrders = async () => {
+  const query = `
+    SELECT *
+    FROM Trybesmith.Orders`;
+  const [result] = await connection.execute(query);
   const order = result as Order[];
   return order;
 };
