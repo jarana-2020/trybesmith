@@ -23,3 +23,13 @@ export interface Order {
   productId: number;
   userId: number;
 }
+
+export interface NewOrder extends OrderProducts {
+  id?: number;
+  user: number;
+  
+}
+
+export interface OrderProducts {
+  products: number[];
+}
