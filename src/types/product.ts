@@ -11,3 +11,16 @@ export type ProductCreated = {
     amount: string
   }
 };
+
+export type OrderCreated = {
+  order: {
+    userId: number;
+    products: number[];
+  }
+};
+
+export type ReceivedOrder = {
+  id: number;
+  userId: number;
+  products: number[];
+};
